@@ -1,5 +1,6 @@
 from picamera.array import PiRGBArray
-from picamera import PiCamera 
+from picamera import PiCamera
+from threading import Thread
 import time
 import cv2
 import json
@@ -8,17 +9,17 @@ import label_map_util
 import tf_labels
 import project_metods
 
-class Camera():
+class Camera:
     
-    def __init__(self):
+    def __init__(self, resolution=(320, 240), framerate=32):
         self.cam = PiCamera()
         
         #with open("camera_settings.json", "r") as read_file:
         #    data = json.load(read_file)
         #    print(data)
         
-        self.cam.resolution = (304, 304)
-        self.cam.framerate = 32
+        self.cam.resolution = resolution
+        self.cam.framerate = framerate
         self.cam.sharpness = 0
         self.cam.contrast = 0
         self.cam.brightness = 50
@@ -36,7 +37,8 @@ class Camera():
         self.cam.vflip = False
         self.cam.crop = (0.0, 0.0, 1.0, 1.0)
         
-        self.raw_capture = PiRGBArray(self.cam, size=(304, 304))
+        self.raw_capture = PiRGBArray(self.cam, size=resolution)
+        self.stream = self.cam.capture_continuous(self.raw_capture, format="bgr", use_video_port=True)
         
         self.key = None
         self.img = None
@@ -45,7 +47,7 @@ class Camera():
         
     def video(self):
         
-        for frame in self.cam.capture_continuous(self.raw_capture, format="bgr", use_video_port=True):
+        for frame in self.stream:
             self.capture(frame)
             
             if self.key == ord("q"):

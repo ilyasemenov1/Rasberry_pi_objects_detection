@@ -21,7 +21,7 @@ class Main:
 
         for detection in cvOut[0,0,:,:]:
             score = float(detection[2])
-            if score > 0.25:
+            if score > 0.4:
                 left = int(detection[3] * cols)
                 top = int(detection[4] * rows)
                 right = int(detection[5] * cols)
@@ -33,3 +33,6 @@ class Main:
                 cv2.putText(self.img, label, (left, top), cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2)
                 
         return self.img
+    
+    def road_recognition(self):
+        pass
