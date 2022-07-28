@@ -3,7 +3,7 @@
 
 [Opencv Library](https://github.com/opencv/opencv)
 
-## Feachers
+## Features
 
 - Object detection 
 - Works on rasberry pi os (Linux)
