@@ -1,5 +1,5 @@
 
-# Neural network for detection objects on raspberry pi
+# Neural network for detection objects on a raspberry pi
 
 [Opencv Library](https://github.com/opencv/opencv)
 
