@@ -6,7 +6,7 @@
 ## Features
 
 - Object detection 
-- Works on rasberry pi os (Linux)
+- Works on raspberry pi os (Linux)
 - Video picture
 
 ## Links
